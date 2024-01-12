@@ -29,8 +29,9 @@ public class HotelServiceImpl implements HotelService {
 
             if (hotel != null) {
                 subList.add(hotel);
-                subList.displayByOrder(DataFactory.idCom);
             }
+
+            subList.displayByOrder(DataFactory.idCom);
         } else if (subChoice == 2) {
             String name = Inputter.getStringWithCap("Enter hotel_name to find:");
             HotelList subList = hotelDAO.searchByName(name);
@@ -47,14 +48,19 @@ public class HotelServiceImpl implements HotelService {
         if (Visual.getSubChoice(new String[]{"Confirm"}) != 1) {
             System.out.println("Cancelled deleting");
         } else if (!hotelDAO.deleteOne(id)) {
-            System.out.println("failed to delete because hotel doesn't exist or something went wrong!");
+            System.out.println("Failed to delete because hotel doesn't exist or something went wrong!");
         } else {
-            System.out.println("succeeded to delete the hotel!");
+            System.out.println("Succeeded to delete the hotel!");
         }
     }
     @Override
     public void updateHotel() {
-        String id = Inputter.getId(hotelDAO, true);
+        String id = Inputter.getId();
+        if (!hotelDAO.check(id)) {
+            System.out.println("Hotel does not exist");
+            return;
+        }
+
         String name = Inputter.getStringEmpty("Enter hotel_name:");
         int avaRooms = Inputter.getIntEmpty("Enter available_rooms (greater than or equal 0):", 0, Integer.MAX_VALUE);
         String address = Inputter.getStringEmpty("Enter hotel_address:");
@@ -66,9 +72,9 @@ public class HotelServiceImpl implements HotelService {
             HotelList table = new HotelList(1);
             table.add(updatedHotel);
             table.displayByOrder();
-            System.out.println("succeeded to update hotel information");
+            System.out.println("Succeeded to update hotel information");
         } else {
-            System.out.println("failed to update hotel information");
+            System.out.println("Failed to update hotel information");
         }
     }
     @Override
@@ -110,9 +116,9 @@ public class HotelServiceImpl implements HotelService {
             hotel = new Hotel(id, name, avaRooms, address, phone, rating);
 
             if (!hotelDAO.save(hotel)) {
-                System.out.println("failed to add a new hotel!");
+                System.out.println("Failed to add a new hotel!");
             } else {
-                System.out.println("succeeded to add a new hotel!");
+                System.out.println("Succeeded to add a new hotel!");
             }
 
             if (Visual.getSubChoice(new String[]{"Continue"}) != 1) {
