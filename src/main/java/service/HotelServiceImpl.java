@@ -16,7 +16,7 @@ public class HotelServiceImpl implements HotelService {
 
     @Override
     public void displayHotels() {
-        hotelDAO.getAll().displayByOrder(DataFactory.nameCom);
+        hotelDAO.getAll().display(DataFactory.nameCom);
     }
     @Override
     public void searchHotel() {
@@ -31,12 +31,12 @@ public class HotelServiceImpl implements HotelService {
                 subList.add(hotel);
             }
 
-            subList.displayByOrder(DataFactory.idCom);
+            subList.display(DataFactory.idCom);
         } else if (subChoice == 2) {
             String name = Inputter.getStringWithCap("Enter hotel_name to find:");
             HotelList subList = hotelDAO.searchByName(name);
 
-            subList.displayByOrder(DataFactory.idCom);
+            subList.display(DataFactory.idCom);
         } else {
             System.out.println("Going to main menu...");
         }
@@ -71,7 +71,7 @@ public class HotelServiceImpl implements HotelService {
         if (updatedHotel != null) {
             HotelList table = new HotelList(1);
             table.add(updatedHotel);
-            table.displayByOrder();
+            table.display();
             System.out.println("Succeeded to update hotel information");
         } else {
             System.out.println("Failed to update hotel information");

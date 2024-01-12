@@ -93,12 +93,12 @@ public class HotelList extends ArrayList<Hotel> {
         return list;
     }
 
-    public void displayByOrder() {
+    public void display() {
         this.sort(DataFactory.idCom);
         Visual.printDataAsTable(this, new String[]{"Hotel_Id", "Hotel_Name", "Hotel_Room_Available", "Hotel_Address", "Hotel_Phone", "Hotel_Rating"}, "HOTEL");
     }
 
-    public void displayByOrder(Comparator<Hotel> comparator) {
+    public void display(Comparator<Hotel> comparator) {
         this.sort(comparator);
         Visual.printDataAsTable(this, new String[]{"Hotel_Id", "Hotel_Name", "Hotel_Room_Available", "Hotel_Address", "Hotel_Phone", "Hotel_Rating"}, "HOTEL");
     }
