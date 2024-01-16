@@ -1,1 +1,3 @@
-### Hotel-Management-System - MVC
+# Hotel-Management-System - MVC
+### Tech stacks:
+* Java 17
